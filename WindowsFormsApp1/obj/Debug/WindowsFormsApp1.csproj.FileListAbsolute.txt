@@ -15,3 +15,4 @@ E:\Project_saved\dotNetSaves\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\Windows
 E:\Project_saved\dotNetSaves\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.MainWindow.resources
 E:\Project_saved\dotNetSaves\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.AddRentalRecord.resources
 E:\Project_saved\dotNetSaves\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.ManageVehicleListing.resources
+E:\Project_saved\dotNetSaves\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.AddEditVehicle.resources
