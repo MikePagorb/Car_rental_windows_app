@@ -28,10 +28,10 @@ namespace WindowsFormsApp1
             lblTitle.Text = "Edit Vehicle";
             isEditMode = true;
             _db = new CarRentalEntities1();
-            PopulateFiealds(carEdit);
+            PopulateFields(carEdit);
         }
 
-        private void PopulateFiealds(TypesOfCar car)
+        private void PopulateFields(TypesOfCar car)
         {
             lblId.Text = car.id.ToString();
             tbMake.Text = car.Make;
@@ -43,32 +43,59 @@ namespace WindowsFormsApp1
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (isEditMode)
+            try
             {
-                var id = int.Parse(lblId.Text);
-                var car = _db.TypesOfCars.FirstOrDefault(q => q.id == id);
-                car.Model = tbModel.Text;
-                car.Make = tbMake.Text;
-                car.VIN = tbVIN.Text;
-                car.LicensePlateNumber = tbLicenseNum.Text;
-                car.Year = int.Parse(tbYear.Text);
-
-                _db.SaveChanges();
-            }
-            else
-            {
-                var newCar = new TypesOfCar
+                string message = "";
+                bool isValid = true;
+                if (string.IsNullOrWhiteSpace(tbModel.Text) || string.IsNullOrWhiteSpace(tbMake.Text))
                 {
-                    LicensePlateNumber = tbLicenseNum.Text,
-                    Make = tbMake.Text,
-                    Model = tbModel.Text,
-                    VIN = tbVIN.Text,
-                    Year = int.Parse(tbYear.Text)
-                };
+                    isValid = false;
+                    message += "Please enter Car Make and Model\n\r";
+                }
 
-                _db.TypesOfCars.Add(newCar);
-                _db.SaveChanges();
+                if (isValid)
+                {
+                    if (isEditMode)
+                    {
+                        var id = int.Parse(lblId.Text);
+                        var car = _db.TypesOfCars.FirstOrDefault(q => q.id == id);
+                        car.Model = tbModel.Text;
+                        car.Make = tbMake.Text;
+                        car.VIN = tbVIN.Text;
+                        car.LicensePlateNumber = tbLicenseNum.Text;
+                        car.Year = int.Parse(tbYear.Text);
+
+                        _db.SaveChanges();
+                    }
+                    else
+                    {
+                        var newCar = new TypesOfCar
+                        {
+                            LicensePlateNumber = tbLicenseNum.Text,
+                            Make = tbMake.Text,
+                            Model = tbModel.Text,
+                            VIN = tbVIN.Text,
+                            Year = int.Parse(tbYear.Text)
+                        };
+
+                        _db.TypesOfCars.Add(newCar);
+                        _db.SaveChanges();
+                    }
+
+                    MessageBox.Show("Please, In Manage Vehicle window refresh a table");
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show(message);
+                }
+                
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error: "+ ex.Message);
+            }
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
