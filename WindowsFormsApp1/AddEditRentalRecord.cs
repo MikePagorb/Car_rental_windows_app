@@ -10,13 +10,47 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class AddRentalRecord : Form
+    public partial class AddEditRentalRecord : Form
     {
+        private bool isEditMode;
+        private ManageRentalRecord _manageRentalRecords;
         private readonly CarRentalEntities1 carRentalEntities;
-        public AddRentalRecord()
+        public AddEditRentalRecord(ManageRentalRecord manageRentalRecords=null)
         {
             InitializeComponent();
+            lblTitle.Text = "Add New Rental";
+            this.Text = "Add New Rental";
+            isEditMode = false;
+            _manageRentalRecords = manageRentalRecords;
             carRentalEntities = new CarRentalEntities1();
+        }
+
+        public AddEditRentalRecord(CarRentalRecord recordToEdit, ManageRentalRecord manageRentalRecord = null)
+        {
+            InitializeComponent();
+            lblTitle.Text = "Edit New Rental";
+            this.Text = "Edit New Rental";
+            _manageRentalRecords = manageRentalRecord;
+            if (recordToEdit == null)
+            {
+                MessageBox.Show("Please ensure that you selected a valid record to edit");
+                Close();
+            }
+            else
+            {
+                isEditMode = true;
+                carRentalEntities = new CarRentalEntities1();
+                PopulateFields(recordToEdit);
+            }
+        }
+
+        private void PopulateFields(CarRentalRecord recordToEdit)
+        {
+            tbCusctomerName.Text = recordToEdit.CustomerName;
+            dateTimeRented.Value = (DateTime)recordToEdit.DateRented;
+            dateTimeReturned.Value = (DateTime)recordToEdit.DateReturned;
+            tbCost.Text = recordToEdit.Cost.ToString();
+            lblRecordId.Text = recordToEdit.id.ToString();
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -47,14 +81,25 @@ namespace WindowsFormsApp1
                 if (isValid)
                 {
                     var rentalRecord = new CarRentalRecord();
+                    if (isEditMode)
+                    {
+                        var id = int.Parse(lblRecordId.Text);
+                        rentalRecord = carRentalEntities.CarRentalRecords.FirstOrDefault(q => q.id == id);
+                    }
+
                     rentalRecord.CustomerName = customerName;
                     rentalRecord.DateRented = dateOut;
                     rentalRecord.DateReturned = dateIn;
                     rentalRecord.Cost = Convert.ToDecimal(cost);
                     rentalRecord.TypeOfCarId = (int)cbTypeOfCar.SelectedValue;
 
-                    carRentalEntities.CarRentalRecords.Add(rentalRecord);
+                    if (!isEditMode)
+                    {
+                        carRentalEntities.CarRentalRecords.Add(rentalRecord);
+                    }
+
                     carRentalEntities.SaveChanges();
+                    _manageRentalRecords.PopulateGrid();
 
                     MessageBox.Show($"Customer name: {customerName}\n\r" +
                                     $"Date Rented: {dateOut}\n\r" +
@@ -62,6 +107,8 @@ namespace WindowsFormsApp1
                                     $"Cost: {cost}\n\r" +
                                     $"Car Type: {carType}\n\r" +
                                     $"THANK YU FOR YOUR BUSINESS!!!");
+
+                    Close();
                 }
                 else
                 {

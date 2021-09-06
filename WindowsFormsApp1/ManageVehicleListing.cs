@@ -13,6 +13,22 @@ namespace WindowsFormsApp1
     public partial class ManageVehicleListing : Form
     {
         private readonly CarRentalEntities1 _db;
+
+        public void PopulateGrid()
+        {
+            var cars = _db.TypesOfCars.Select(q => new
+            {
+                Make = q.Make,
+                Model = q.Model,
+                VIN = q.VIN,
+                Year = q.Year,
+                LicensePlateNumber = q.LicensePlateNumber,
+                q.id
+            }).ToList();
+            gvVehicleList.DataSource = cars;
+            gvVehicleList.Columns[4].HeaderText = "License Plate Number";
+            gvVehicleList.Columns[5].Visible = false;
+        }
         public ManageVehicleListing()
         {
             InitializeComponent();
@@ -21,35 +37,22 @@ namespace WindowsFormsApp1
 
         private void ManageVehicleListing_Load(object sender, EventArgs e)
         {
-            //var cars = _db.TypesOfCars.ToList();
-
-            // Select Id as CarId and name as CarName from TypesOfCars
-            //var cars = _db.TypesOfCars
-            //    .Select(q => new { CarId = q.id, CarName = q.Make })
-            //    .ToList();
-
-            var cars = _db.TypesOfCars
-                .Select(q => new
-                {
-                    Make = q.Make, 
-                    Model = q.Model,
-                    VIN = q.VIN,
-                    Year = q.Year, 
-                    LicensePlateNumber = q.LicensePlateNumber,
-                    q.id
-                })
-                .ToList();
-
-            gvVehicleList.DataSource = cars;
-            gvVehicleList.Columns[4].HeaderText = "License Plate Number";
-            gvVehicleList.Columns[5].Visible = false;
+            try
+            {
+                PopulateGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
 
         private void btnAddNewCar_Click(object sender, EventArgs e)
         {
-            AddEditVehicle addEditVehicle = new AddEditVehicle();
+            AddEditVehicle addEditVehicle = new AddEditVehicle(this);
+            addEditVehicle.ShowDialog();
             addEditVehicle.MdiParent = this.MdiParent;
-            addEditVehicle.Show();
+
         }
 
         private void btnEditCar_Click(object sender, EventArgs e)
@@ -60,9 +63,10 @@ namespace WindowsFormsApp1
 
                 var car = _db.TypesOfCars.FirstOrDefault(q => q.id == id);
 
-                var addEditVehicle = new AddEditVehicle(car);
+                var addEditVehicle = new AddEditVehicle(car,this);
+                addEditVehicle.ShowDialog();
                 addEditVehicle.MdiParent = this.MdiParent;
-                addEditVehicle.Show();
+
             }
             catch (Exception ex)
             {
@@ -79,10 +83,15 @@ namespace WindowsFormsApp1
 
                 var car = _db.TypesOfCars.FirstOrDefault(q => q.id == id);
 
-                _db.TypesOfCars.Remove(car);
-                _db.SaveChanges();
+                DialogResult dr = MessageBox.Show("Are you sure you want to delete this record?", "Delete",
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
 
-                gvVehicleList.Refresh();
+                if (dr == DialogResult.Yes)
+                {
+                    _db.TypesOfCars.Remove(car);
+                    _db.SaveChanges();
+                }
+                PopulateGrid();
             }
             catch (Exception ex)
             {
@@ -95,22 +104,6 @@ namespace WindowsFormsApp1
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             PopulateGrid();
-        }
-
-        private void PopulateGrid()
-        {
-            var cars = _db.TypesOfCars.Select(q => new
-            {
-                Make = q.Make,
-                Model = q.Model,
-                VIN = q.VIN,
-                Year = q.Year,
-                LicensePlateNumber = q.LicensePlateNumber,
-                q.id
-            }).ToList();
-            gvVehicleList.DataSource = cars;
-            gvVehicleList.Columns[4].HeaderText = "License Plate Number";
-            gvVehicleList.Columns[5].Visible = false;
         }
     }
 }
