@@ -30,18 +30,18 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbLicenseNum = new System.Windows.Forms.TextBox();
+            this.tbYear = new System.Windows.Forms.TextBox();
+            this.tbVIN = new System.Windows.Forms.TextBox();
+            this.tbModel = new System.Windows.Forms.TextBox();
+            this.labelLicensePlateNum = new System.Windows.Forms.Label();
+            this.labelYear = new System.Windows.Forms.Label();
+            this.labelVIN = new System.Windows.Forms.Label();
+            this.labelModel = new System.Windows.Forms.Label();
+            this.labelMake = new System.Windows.Forms.Label();
+            this.tbMake = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.labelMake = new System.Windows.Forms.Label();
-            this.labelModel = new System.Windows.Forms.Label();
-            this.labelVIN = new System.Windows.Forms.Label();
-            this.labelYear = new System.Windows.Forms.Label();
-            this.labelLicensePlateNum = new System.Windows.Forms.Label();
-            this.tbMake = new System.Windows.Forms.TextBox();
-            this.tbModel = new System.Windows.Forms.TextBox();
-            this.tbVIN = new System.Windows.Forms.TextBox();
-            this.tbYear = new System.Windows.Forms.TextBox();
-            this.tbLicenseNum = new System.Windows.Forms.TextBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
@@ -73,6 +73,86 @@ namespace WindowsFormsApp1
             this.tableLayoutPanel1.Size = new System.Drawing.Size(797, 255);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // tbLicenseNum
+            // 
+            this.tbLicenseNum.Location = new System.Drawing.Point(401, 207);
+            this.tbLicenseNum.Name = "tbLicenseNum";
+            this.tbLicenseNum.Size = new System.Drawing.Size(227, 22);
+            this.tbLicenseNum.TabIndex = 13;
+            // 
+            // tbYear
+            // 
+            this.tbYear.Location = new System.Drawing.Point(401, 156);
+            this.tbYear.Name = "tbYear";
+            this.tbYear.Size = new System.Drawing.Size(227, 22);
+            this.tbYear.TabIndex = 12;
+            // 
+            // tbVIN
+            // 
+            this.tbVIN.Location = new System.Drawing.Point(401, 105);
+            this.tbVIN.Name = "tbVIN";
+            this.tbVIN.Size = new System.Drawing.Size(227, 22);
+            this.tbVIN.TabIndex = 11;
+            // 
+            // tbModel
+            // 
+            this.tbModel.Location = new System.Drawing.Point(401, 54);
+            this.tbModel.Name = "tbModel";
+            this.tbModel.Size = new System.Drawing.Size(227, 22);
+            this.tbModel.TabIndex = 10;
+            // 
+            // labelLicensePlateNum
+            // 
+            this.labelLicensePlateNum.AutoSize = true;
+            this.labelLicensePlateNum.Location = new System.Drawing.Point(3, 204);
+            this.labelLicensePlateNum.Name = "labelLicensePlateNum";
+            this.labelLicensePlateNum.Size = new System.Drawing.Size(147, 17);
+            this.labelLicensePlateNum.TabIndex = 8;
+            this.labelLicensePlateNum.Text = "License Plate Number";
+            // 
+            // labelYear
+            // 
+            this.labelYear.AutoSize = true;
+            this.labelYear.Location = new System.Drawing.Point(3, 153);
+            this.labelYear.Name = "labelYear";
+            this.labelYear.Size = new System.Drawing.Size(38, 17);
+            this.labelYear.TabIndex = 6;
+            this.labelYear.Text = "Year";
+            // 
+            // labelVIN
+            // 
+            this.labelVIN.AutoSize = true;
+            this.labelVIN.Location = new System.Drawing.Point(3, 102);
+            this.labelVIN.Name = "labelVIN";
+            this.labelVIN.Size = new System.Drawing.Size(30, 17);
+            this.labelVIN.TabIndex = 4;
+            this.labelVIN.Text = "VIN";
+            // 
+            // labelModel
+            // 
+            this.labelModel.AutoSize = true;
+            this.labelModel.Location = new System.Drawing.Point(3, 51);
+            this.labelModel.Name = "labelModel";
+            this.labelModel.Size = new System.Drawing.Size(46, 17);
+            this.labelModel.TabIndex = 2;
+            this.labelModel.Text = "Model";
+            // 
+            // labelMake
+            // 
+            this.labelMake.AutoSize = true;
+            this.labelMake.Location = new System.Drawing.Point(3, 0);
+            this.labelMake.Name = "labelMake";
+            this.labelMake.Size = new System.Drawing.Size(42, 17);
+            this.labelMake.TabIndex = 0;
+            this.labelMake.Text = "Make";
+            // 
+            // tbMake
+            // 
+            this.tbMake.Location = new System.Drawing.Point(401, 3);
+            this.tbMake.Name = "tbMake";
+            this.tbMake.Size = new System.Drawing.Size(227, 22);
+            this.tbMake.TabIndex = 9;
+            // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(12, 377);
@@ -93,92 +173,12 @@ namespace WindowsFormsApp1
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // labelMake
-            // 
-            this.labelMake.AutoSize = true;
-            this.labelMake.Location = new System.Drawing.Point(3, 0);
-            this.labelMake.Name = "labelMake";
-            this.labelMake.Size = new System.Drawing.Size(42, 17);
-            this.labelMake.TabIndex = 0;
-            this.labelMake.Text = "Make";
-            // 
-            // labelModel
-            // 
-            this.labelModel.AutoSize = true;
-            this.labelModel.Location = new System.Drawing.Point(3, 51);
-            this.labelModel.Name = "labelModel";
-            this.labelModel.Size = new System.Drawing.Size(46, 17);
-            this.labelModel.TabIndex = 2;
-            this.labelModel.Text = "Model";
-            // 
-            // labelVIN
-            // 
-            this.labelVIN.AutoSize = true;
-            this.labelVIN.Location = new System.Drawing.Point(3, 102);
-            this.labelVIN.Name = "labelVIN";
-            this.labelVIN.Size = new System.Drawing.Size(30, 17);
-            this.labelVIN.TabIndex = 4;
-            this.labelVIN.Text = "VIN";
-            // 
-            // labelYear
-            // 
-            this.labelYear.AutoSize = true;
-            this.labelYear.Location = new System.Drawing.Point(3, 153);
-            this.labelYear.Name = "labelYear";
-            this.labelYear.Size = new System.Drawing.Size(38, 17);
-            this.labelYear.TabIndex = 6;
-            this.labelYear.Text = "Year";
-            // 
-            // labelLicensePlateNum
-            // 
-            this.labelLicensePlateNum.AutoSize = true;
-            this.labelLicensePlateNum.Location = new System.Drawing.Point(3, 204);
-            this.labelLicensePlateNum.Name = "labelLicensePlateNum";
-            this.labelLicensePlateNum.Size = new System.Drawing.Size(147, 17);
-            this.labelLicensePlateNum.TabIndex = 8;
-            this.labelLicensePlateNum.Text = "License Plate Number";
-            // 
-            // tbMake
-            // 
-            this.tbMake.Location = new System.Drawing.Point(401, 3);
-            this.tbMake.Name = "tbMake";
-            this.tbMake.Size = new System.Drawing.Size(227, 22);
-            this.tbMake.TabIndex = 9;
-            // 
-            // tbModel
-            // 
-            this.tbModel.Location = new System.Drawing.Point(401, 54);
-            this.tbModel.Name = "tbModel";
-            this.tbModel.Size = new System.Drawing.Size(227, 22);
-            this.tbModel.TabIndex = 10;
-            // 
-            // tbVIN
-            // 
-            this.tbVIN.Location = new System.Drawing.Point(401, 105);
-            this.tbVIN.Name = "tbVIN";
-            this.tbVIN.Size = new System.Drawing.Size(227, 22);
-            this.tbVIN.TabIndex = 11;
-            // 
-            // tbYear
-            // 
-            this.tbYear.Location = new System.Drawing.Point(401, 156);
-            this.tbYear.Name = "tbYear";
-            this.tbYear.Size = new System.Drawing.Size(227, 22);
-            this.tbYear.TabIndex = 12;
-            // 
-            // tbLicenseNum
-            // 
-            this.tbLicenseNum.Location = new System.Drawing.Point(401, 207);
-            this.tbLicenseNum.Name = "tbLicenseNum";
-            this.tbLicenseNum.Size = new System.Drawing.Size(227, 22);
-            this.tbLicenseNum.TabIndex = 13;
-            // 
             // lblTitle
             // 
             this.lblTitle.Font = new System.Drawing.Font("Matura MT Script Capitals", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(53, 9);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(627, 65);
+            this.lblTitle.Size = new System.Drawing.Size(718, 65);
             this.lblTitle.TabIndex = 3;
             // 
             // lblId

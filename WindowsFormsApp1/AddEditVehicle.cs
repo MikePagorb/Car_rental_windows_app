@@ -13,20 +13,36 @@ namespace WindowsFormsApp1
     public partial class AddEditVehicle : Form
     {
         private bool isEditMode;
-        private readonly CarRentalEntities1 _db = new CarRentalEntities1();
-        public AddEditVehicle()
+        private ManageVehicleListing _manageVehicleListing;
+        private readonly CarRentalEntities1 _db;
+        public AddEditVehicle(ManageVehicleListing manageVehicleListing = null)
         {
             InitializeComponent();
             lblTitle.Text = "Add New Vehicle";
+            this.Text = "Add New Vehicle";
             isEditMode = false;
+            _manageVehicleListing = manageVehicleListing;
+            _db = new CarRentalEntities1();
 
         }
 
-        public AddEditVehicle(TypesOfCar carEdit)
+        public AddEditVehicle(TypesOfCar carEdit, ManageVehicleListing manageVehicleListing = null)
         {
             InitializeComponent();
             lblTitle.Text = "Edit Vehicle";
-            isEditMode = true;
+            this.Text = "Edit Vehicle";
+            _manageVehicleListing = manageVehicleListing;
+            if (carEdit == null)
+            {
+                MessageBox.Show("Please ensure that you selected a valid record to edit");
+                Close();
+            }
+            else
+            {
+                isEditMode = true;
+                _db = new CarRentalEntities1();
+                PopulateFields(carEdit);
+            }
             _db = new CarRentalEntities1();
             PopulateFields(carEdit);
         }
@@ -64,8 +80,6 @@ namespace WindowsFormsApp1
                         car.VIN = tbVIN.Text;
                         car.LicensePlateNumber = tbLicenseNum.Text;
                         car.Year = int.Parse(tbYear.Text);
-
-                        _db.SaveChanges();
                     }
                     else
                     {
@@ -79,10 +93,12 @@ namespace WindowsFormsApp1
                         };
 
                         _db.TypesOfCars.Add(newCar);
-                        _db.SaveChanges();
+
                     }
 
-                    MessageBox.Show("Please, In Manage Vehicle window refresh a table");
+                    _db.SaveChanges();
+                    _manageVehicleListing.PopulateGrid();
+                    //MessageBox.Show("Please, In Manage Vehicle window refresh a table");
                     Close();
                 }
                 else
